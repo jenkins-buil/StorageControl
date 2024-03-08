@@ -13,6 +13,7 @@ const Home = () => {
       const response = await blogFetch.get("/produtos")
       const data = response.data
       setPost(data)
+      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -25,16 +26,24 @@ const Home = () => {
   return (
     <div className='home'>
       <h1>Produtos em estoque</h1>
-      {posts.length === 0 ? (<p>Carregando....</p>) : (
+      {posts.length === 0 ? (<p>Não tem produto em estoque!</p>) : (
         posts.map((post) => (
           <div className="post" key={post.id}>
-            <p><strong>Marca: </strong>{post.marca}</p>
-            <p><strong>Tamanho: </strong>{post.tamanho}</p>
-            <p><strong>Cor: </strong>{post.cor}</p>
-            <p><strong>Quantidade: </strong>{post.quantidade}</p>
-            <Link to={`/produtos/${post.id}`} className='btn'>
-              Produto
-            </Link>
+            <h3>Categoria: { post.categoria}</h3><br />
+            <p><strong>Produto: </strong>{post.descricao}</p>
+            <p><strong>Marca: </strong>{post.marca}</p><br />
+            {/* <ul>
+              <li>
+                <Link to={`/produtos/${post.id}`} className='btn'>
+                  detalhe produto
+                </Link><br />
+              </li>
+              <li>
+                <Link to={`/entradas/${post.id}`} className='btn'>
+                  historico entrada
+                </Link>
+              </li>
+            </ul> */}
           </div>
         ))
       )}

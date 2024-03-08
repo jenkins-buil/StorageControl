@@ -1,6 +1,8 @@
 import Home from './routes/Home'
 import NewPost from './routes/NewPost'
 import Categoria from './routes/Categoria'
+import Entradas from './routes/Entradas'
+import NovaCategoria from './routes/NovaCategoria'
 import Post from './routes/Post'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
       {
         path: "/categorias",
         element: <Categoria />
+      },
+      {
+        path: "/entradas/:id",
+        element: <Entradas />
+      }, 
+      {
+        path: "nova_categoria",
+        element: <NovaCategoria />
       }
     ]
   }
