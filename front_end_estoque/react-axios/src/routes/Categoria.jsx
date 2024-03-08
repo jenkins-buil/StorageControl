@@ -1,6 +1,7 @@
 import blogFetch from "../axios/config"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import "./Categoria.css"
 
 const Categoria = () => {
     const [getAll, setGetAll] = useState()
@@ -21,12 +22,12 @@ const Categoria = () => {
 
   return (
     <div className='home'>
-      <h1>Categorias</h1>
-      {!getAll ? (<p>Carregando....</p>) : (
+      <h1>Opções de Categorias</h1><br />
+      {!getAll ? (<p>Você não possui nenhuma categoria!</p>) : (
         getAll.map((post) => (
           <div className="post" key={post.id}>
             <p><strong>Categoria: </strong>{post.categoria}</p>
-            <p><strong>id: </strong>{post.id}</p>
+            <p><strong>Nº categoria: </strong>{post.id}</p>
             <Link to={`/new/${post.id}`} className='btn'>
               Continuar
             </Link>

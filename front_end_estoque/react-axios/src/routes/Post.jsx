@@ -13,7 +13,8 @@ const Post = () => {
     try {
       const response = await blogFetch.get(`/produtos/${id}`)
       const data = response.data
-      console.log( await data[0].categoria_id)
+      setPosts(data)
+      console.log( await data[0])
       
       
     } catch (error) {
@@ -28,17 +29,44 @@ const Post = () => {
   return (
     <div className="post-container">
       {!posts[0] ? (
-        <p>Carregando...</p>
+        <p>Sem produto em estoque!</p>
       ) : ( 
       <div className="post">
+        <h3>Produto: {posts[0].categoria}</h3><br />
         <p><strong>Marca: </strong>{posts[0].marca}</p>
-        <p><strong>Tamanho: </strong>{posts[0].tamanho}</p>
-        <p><strong>Quantidade: </strong>{posts[0].quantidade}</p>
+        <p><strong>Descrição: </strong>{posts[0].descricao}</p><br />
+        <table>
+        <thead>
+            <h2>Estoque do produto</h2>
+            <tr>
+                <th>Categoria</th>
+                <th>Tamanho</th>
+                <th>Marca</th>
+                <th>Descrição</th>
+                <th>Cor</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+          {posts.map(item => (
+            <tr key={item.id} className="item">
+              <td>{item.categoria}</td>
+              <td>{item.tamanho}</td>
+              <td>{item.marca}</td>
+              <td>{item.descricao}</td>
+              <td>{item.cor}</td>
+              <td>{item.quantidade}</td>
+            </tr>
+          ))}
+        </tbody>
+        </table>
+      
       </div>
       )}
-      <div className="container-excluir"><Link className="btn-details">Excluir</Link></div>
-      <div className="container-editar"><Link className="btn-details">Editar</Link></div>
+      
+        
     </div>
+    
   )
 }
 

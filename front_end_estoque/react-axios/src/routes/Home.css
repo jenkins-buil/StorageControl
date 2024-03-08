@@ -30,3 +30,7 @@
     color: #FFF;
     background-color: #0e1217;
 }
+
+p, label {
+    font-size: 20px;
+}

@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from src.controll.produtoControll import ProdutoControll 
 from src.controll.categoriaControll import CategoriaControll
+from src.controll.entrada_saida import Entrada_Saida_Controll 
 
 
 
@@ -11,8 +12,11 @@ cors = CORS(app)
 @app.route('/produtos', methods=['POST'])
 def inserirProdutos():
     produto = request.json
+    temProduto = ProdutoControll.produtoPossuiCadastro(produto)
+    if temProduto:
+        return "Produto já possui cadastro"
     ProdutoControll.create(produto)
-    return "Produto inserido com sucesso"
+    return "produto inserido!"
 
 @app.route('/produtos')
 def buscarProdutos():
@@ -22,8 +26,6 @@ def buscarProdutos():
 @app.route('/produtos/<int:id>')
 def buscarProdutoPeloId(id):
     produto = ProdutoControll.findById(id)
-    if produto == None:
-        return "Produto não cadastrado"
     return jsonify(produto)
 
 @app.route('/teste/<name>')
@@ -37,6 +39,25 @@ def buscarProdutoPeloNome(name):
 def getCategoria():
     categoria = CategoriaControll.findAll()
     return jsonify(categoria)
+
+@app.route('/categorias', methods=['POST'])
+def inserirCategorias():
+    categoria = request.json
+    temCategoria = CategoriaControll.findByCategoriaName(categoria)
+    if temCategoria == []:
+        CategoriaControll.create(categoria)
+        return "Categoria inserido com sucesso"
+    return "Já existe cadastro para categoria infomado!"
+@app.route('/entradas', methods=['POST'])
+def entradaProduto():
+    produto = request.json
+    Entrada_Saida_Controll.entradaProduto(produto)
+    return "Atualizado com sucesso!"
+
+@app.route('/entradas/<int:id>')
+def historicoEntradas(id):
+    produto = Entrada_Saida_Controll.historicoEntrada(id)
+    return jsonify(produto)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -10,18 +10,16 @@ const NewPost = () => {
 
   const navigate = useNavigate()
 
+  const [descricao, setDescricao] = useState()
   const [marca, setMarca] = useState()
-  const [tamanho, setTamanho] = useState()
-  const [cor, setCor] = useState()
   const categoria_id = id
 
   const createPost = async(e) => {
     e.preventDefault()
     
     await blogFetch.post("/produtos", {
+      descricao,
       marca,
-      tamanho,
-      cor,
       categoria_id
     })
     navigate("/")
@@ -29,36 +27,26 @@ const NewPost = () => {
 
   return (
     <div className='new-post'>
-      <h2>Inserir produto: </h2>
+      <h2>Cadastro de Produtos </h2>
       <form onSubmit={(e) => createPost(e)}>
       <div className="form-control">
-        <label htmlFor="marca-produto">Marca Produto</label>
+        <label htmlFor="marca-produto">Produto:</label>
         <input 
           type="text" 
           name='marca-produto' 
           id='marca-produto' 
-          placeholder='Marca do produto'
-          onChange={(e) => setMarca(e.target.value)}
+          placeholder='Inserir nome do produto'
+          onChange={(e) => setDescricao(e.target.value)}
         />
       </div>
       <div className="form-control">
-        <label htmlFor="tamanho-produto">Tamanho Produto</label>
+        <label htmlFor="tamanho-produto">Marca:</label>
         <input 
           type="text" 
           name='tamanho-produto' 
           id='tamanho-produto' 
-          placeholder='Tamanho do produto'
-          onChange={(e) => setTamanho(e.target.value)}
-        />
-      </div>
-      <div className="form-control">
-        <label htmlFor="cor-produto">Cor Produto</label>
-        <input 
-          type="text" 
-          name='cor-produto' 
-          id='cor-produto' 
-          placeholder='Cor do produto'
-          onChange={(e) => setCor(e.target.value)}
+          placeholder='Inserir marca do produto'
+          onChange={(e) => setMarca(e.target.value)}
         />
       </div>
       <input type="submit" value="Cadastrar" className='btn'/>
