@@ -9,6 +9,8 @@ from src.controll.entrada_saida import Entrada_Saida_Controll
 app = Flask(__name__)
 cors = CORS(app)
 
+
+
 @app.route('/produtos', methods=['POST'])
 def inserirProdutos():
     produto = request.json
@@ -54,10 +56,11 @@ def entradaProduto():
     Entrada_Saida_Controll.entradaProduto(produto)
     return "Atualizado com sucesso!"
 
+
 @app.route('/entradas/<int:id>')
 def historicoEntradas(id):
     produto = Entrada_Saida_Controll.historicoEntrada(id)
     return jsonify(produto)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5000, host='0.0.0.0', debug=True)

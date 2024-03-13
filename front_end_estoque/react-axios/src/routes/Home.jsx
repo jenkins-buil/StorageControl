@@ -32,18 +32,23 @@ const Home = () => {
             <h3>Categoria: { post.categoria}</h3><br />
             <p><strong>Produto: </strong>{post.descricao}</p>
             <p><strong>Marca: </strong>{post.marca}</p><br />
-            {/* <ul>
+            <ul>
               <li>
                 <Link to={`/produtos/${post.id}`} className='btn'>
                   detalhe produto
                 </Link><br />
               </li>
               <li>
-                <Link to={`/entradas/${post.id}`} className='btn'>
-                  historico entrada
-                </Link>
-              </li>
-            </ul> */}
+              <Link to={`/entradas/${post.id}`} className='btn'>
+                historico produto
+              </Link>
+          </li>
+          <li>
+            <Link to={`entrada_produto/${post.id}`} className="btn">
+              Entrada produto
+            </Link>
+          </li>
+            </ul>
           </div>
         ))
       )}
@@ -52,3 +57,6 @@ const Home = () => {
 }
 
 export default Home
+
+
+

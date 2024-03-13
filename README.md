@@ -24,8 +24,8 @@ obs: rodar os comandos dentro da pasta beck_end_estoque.
 - Instalar Flask   
 `pip install Flask`   
 
-- Instalar cors   
-`pip install cors`  
+- Instalar cors do flask   
+`pip install Flask-Cors`  
 
 - Instalar ORM sqlAchemy versão 1.4.17   
 `pip install SQLAlchemy==1.4.17`  

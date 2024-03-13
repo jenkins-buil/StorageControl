@@ -1,10 +1,5 @@
-from src.configs.db import engine
 from src.model.produtoModel import Produtos, Categorias, Quantidades
-from sqlalchemy.orm import sessionmaker
-
-
-Session = sessionmaker(bind=engine)
-session = Session()
+from src.configs.db import session
 
 
 class ProdutoControll:
@@ -53,7 +48,24 @@ class ProdutoControll:
 
             )\
             .all()
-        if data == []:
+        if data != []:
+            for produto in data:
+
+                result.append({
+                    "id": produto[0],
+                    "marca": produto[1],
+                    "descricao": produto[2],
+                    "categoria_id": produto[3],
+                    "categoria": produto[4],
+                    "tamanho": produto[5],
+                    "cor": produto[6],
+                    "quantidade": produto[7]
+                })
+
+            return result
+        
+        
+        else:
             dataCath = session.query(Produtos)\
             .join(Categorias, Categorias.id == Produtos.categoria_id)\
             .filter(Produtos.id == id)\
@@ -73,21 +85,10 @@ class ProdutoControll:
                     "categoria_id": produto[3],
                     "categoria": produto[4]
                 })
-        
-        for produto in data:
-    
-            result.append({
-                "id": produto[0],
-                "marca": produto[1],
-                "descricao": produto[2],
-                "categoria_id": produto[3],
-                "categoria": produto[4],
-                "tamanho": produto[5],
-                "cor": produto[6],
-                "quantidade": produto[7]
-            })
-
-        return result
+            session.expire_all()
+            return result
+            
+            
 
     def findByName(name):
         result = []
@@ -114,7 +115,6 @@ class ProdutoControll:
         
 
     def produtoPossuiCadastro(produto):
-        lista = []
         marca = produto['marca']
         descricao = produto['descricao']
         categoria_id = produto['categoria_id']

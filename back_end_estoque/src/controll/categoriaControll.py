@@ -1,10 +1,6 @@
-from src.configs.db import engine
 from src.model.produtoModel import Categorias
-from sqlalchemy.orm import sessionmaker
+from src.configs.db import session
 
-
-Session = sessionmaker(bind=engine)
-session = Session()
 
 class CategoriaControll:
 
@@ -19,10 +15,12 @@ class CategoriaControll:
             return result
     
     def create(categoria):
+        
         categoria_name = categoria['categoria'].upper()
         data_insert = Categorias(categoria=categoria_name)
         session.add(data_insert)
         session.commit()
+        return
 
     def findByCategoriaName(categoria):
          result = []

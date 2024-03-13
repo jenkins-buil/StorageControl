@@ -28,6 +28,7 @@ class Produtos(Base):
     entrada = relationship("Entradas", backref='produtos', lazy=True)
     saida = relationship("Saidas", backref='produtos', lazy=True)
     quantidade = relationship("Quantidades", backref='produtos', lazy=True)
+    #quantidade = relationship("Quantidades", backref='produtos', lazy=True)
     categoria_id = Column(Integer, ForeignKey("categorias.id"))
 
     def __repr__(self):
@@ -59,7 +60,7 @@ class Saidas(Base):
     tamanho = Column(String(6))
     cor = Column(String(30))
     qtde_saida = Column(BigInteger, default=0)
-    quantidade_id = relationship("Quantidades", backref='saidas', lazy=True)
+    #quantidade_id = relationship("Quantidades", backref='saidas', lazy=True)
     produto_id = Column(Integer, ForeignKey('produtos.id'))
 
 

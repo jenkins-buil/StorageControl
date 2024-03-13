@@ -1,11 +1,8 @@
 from datetime import datetime
-from src.configs.db import engine
 from src.model.produtoModel import Entradas, Quantidades, Produtos 
 from src.controll.atualizaEstoque import AtualizaEstoque
-from sqlalchemy.orm import sessionmaker
+from src.configs.db import session
 
-Session = sessionmaker(bind=engine)
-session = Session()
 
 class Entrada_Saida_Controll:
 
@@ -21,11 +18,9 @@ class Entrada_Saida_Controll:
         session.commit()
         temCadastro = AtualizaEstoque.temCadastroTabelaQuantidade(data_insert)
         if temCadastro:
-            vlr_atual = temCadastro['quantidade'] + qtde_entrada
-            session.query(Quantidades)\
-                .filter(Quantidades.id == temCadastro['id'])\
-                .update({"quantidade": vlr_atual})
-            session.commit()
+            id = temCadastro["id"]
+            vlr_atual = temCadastro['quantidade'] + (int(qtde_entrada))
+            AtualizaEstoque.atualizandoQuantidade(id, vlr_atual)
             return
         AtualizaEstoque.cadastrarNovo(data_insert)  
         return
@@ -45,6 +40,7 @@ class Entrada_Saida_Controll:
                 "produto_id": entrada.produto_id
 
             })
+        session.expire_all()
         return lista
         
 

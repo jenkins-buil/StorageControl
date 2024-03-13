@@ -1,10 +1,6 @@
 from src.model.produtoModel import Quantidades
-from src.configs.db import engine
-from sqlalchemy.orm import sessionmaker
+from src.configs.db import session
 
-
-Session = sessionmaker(bind=engine)
-session = Session()
 
 
 class AtualizaEstoque:
@@ -18,17 +14,17 @@ class AtualizaEstoque:
                                quantidade=quantidade, entrada_id=entrada_id)
         session.add(data_insert)
         session.commit()
+        session.expire_all()
         return
         
     def temCadastroTabelaQuantidade(data):
-        tamanho = data.tamanho
         cor = data.cor
         produto_id = data.produto_id
         data = session.query(Quantidades).filter(Quantidades.produto_id==produto_id).all()
         
         
         for Quantidade in data:
-            if Quantidade.tamanho == tamanho and Quantidade.cor == cor:
+            if Quantidade.cor == cor:
                 return {
                     "id": Quantidade.id,
                     "tamanho": Quantidade.tamanho,
@@ -37,7 +33,13 @@ class AtualizaEstoque:
                     "produto_id": Quantidade.produto_id
                 }
         return
-
+    def atualizandoQuantidade(id, vlr_atual):
+        session.query(Quantidades).filter(Quantidades.id == id).update({Quantidades.quantidade: vlr_atual})
+        session.commit()
+        session.expire_all()
+        return
+        
+        
 
         
         

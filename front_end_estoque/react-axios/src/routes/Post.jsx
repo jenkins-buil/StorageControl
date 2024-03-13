@@ -35,6 +35,7 @@ const Post = () => {
         <h3>Produto: {posts[0].categoria}</h3><br />
         <p><strong>Marca: </strong>{posts[0].marca}</p>
         <p><strong>Descrição: </strong>{posts[0].descricao}</p><br />
+        
         <table>
         <thead>
             <h2>Estoque do produto</h2>
@@ -59,7 +60,7 @@ const Post = () => {
             </tr>
           ))}
         </tbody>
-        </table>
+        </table> 
       
       </div>
       )}
