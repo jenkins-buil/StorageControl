@@ -2,9 +2,9 @@ from src.model.produtoModel import Produtos, Categorias, Quantidades
 from src.configs.db import session
 
 
-class ProdutoControll:
+class Produto:
     
-    def findAll():
+    def buscarTodosProdutos():
         result = []
         
         data = session\
@@ -30,7 +30,7 @@ class ProdutoControll:
         return result
         
         
-    def findById(id):
+    def buscarProdutoPeloId(id):
         result = []
         data = session.query(Produtos)\
         .join(Categorias, Categorias.id == Produtos.categoria_id)\
@@ -90,21 +90,7 @@ class ProdutoControll:
             
             
 
-    def findByName(name):
-        result = []
-        data = session.query(Produtos).filter(Produtos.name == name)
-        if data == None:
-            return None
-        for produto in data:
-            result.append({
-                "id": produto.id,
-                "name": produto.name,
-                "price": produto.price,
-                "color": produto.color
-            })
-        return result
-
-    def create(produto):
+    def crecriarNovoProduto(produto):
         
         marca = produto['marca']
         descricao = produto['descricao']

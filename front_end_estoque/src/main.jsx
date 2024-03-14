@@ -1,10 +1,10 @@
-import Home from './routes/Home'
-import NewPost from './routes/NewPost'
-import Categoria from './routes/Categoria'
-import Entradas from './routes/Entradas'
-import NovaCategoria from './routes/NovaCategoria'
-import Post from './routes/Post'
-import EntradaProduto from './routes/EntradaProduto'
+import Home from './routes/Home.jsx'
+import NovoProduto from './routes/NovoProduto.jsx'
+import Categoria from './routes/Categoria.jsx'
+import HistoricoEntrada from './routes/HistoricoEntrada.jsx'
+import NovaCategoria from './routes/NovaCategoria.jsx'
+import DetalheProduto from './routes/DetalheProduto.jsx'
+import EntradaProduto from './routes/EntradaProduto.jsx'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
@@ -21,11 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/new/:id",
-        element: <NewPost />
+        element: <NovoProduto />
       },
       {
         path: "/produtos/:id",
-        element: <Post />
+        element: <DetalheProduto />
       },
       {
         path: "/categorias",
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/entradas/:id",
-        element: <Entradas />
+        element: <HistoricoEntrada />
       }, 
       {
         path: "nova_categoria",

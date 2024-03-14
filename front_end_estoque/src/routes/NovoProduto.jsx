@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
-import "./NewPost.css"
-const NewPost = () => {
+import "./NovoProduto.css"
+
+const NovoProduto = () => {
 
   const { id } = useParams()
 
@@ -55,4 +56,4 @@ const NewPost = () => {
   )
 }
 
-export default NewPost
+export default NovoProduto

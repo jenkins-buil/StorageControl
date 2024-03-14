@@ -4,7 +4,7 @@ from src.configs.db import session
 
 
 class AtualizaEstoque:
-    def cadastrarNovo(produto):
+    def novoProdutoTabelaQuantidade(produto):
         produto_id = produto.produto_id
         tamanho = produto.tamanho
         cor = produto.cor
@@ -13,11 +13,9 @@ class AtualizaEstoque:
         data_insert = Quantidades(produto_id=produto_id, tamanho=tamanho, cor=cor,
                                quantidade=quantidade, entrada_id=entrada_id)
         session.add(data_insert)
-        session.commit()
-        session.expire_all()
         return
         
-    def temCadastroTabelaQuantidade(data):
+    def estaRegistradoTabelaQuantidade(data):
         cor = data.cor
         produto_id = data.produto_id
         data = session.query(Quantidades).filter(Quantidades.produto_id==produto_id).all()
@@ -35,8 +33,6 @@ class AtualizaEstoque:
         return
     def atualizandoQuantidade(id, vlr_atual):
         session.query(Quantidades).filter(Quantidades.id == id).update({Quantidades.quantidade: vlr_atual})
-        session.commit()
-        session.expire_all()
         return
         
         

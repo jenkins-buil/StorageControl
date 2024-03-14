@@ -1,11 +1,11 @@
 import blogFetch from "../axios/config"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import "./Entradas.css"
+import "./HistoricoEntrada.css"
 
 
 
-const Entradas = () => {
+const HistoricoEntrada = () => {
     const { id } = useParams()
 
     const [entrada, setEntrada] = useState([])
@@ -58,4 +58,4 @@ const Entradas = () => {
   )
 }
 
-export default Entradas
+export default HistoricoEntrada
