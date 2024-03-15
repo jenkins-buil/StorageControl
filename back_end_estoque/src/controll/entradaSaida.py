@@ -39,6 +39,7 @@ class EntradaSaida:
                 "produto_id": entrada.produto_id
 
             })
+        
         return lista
         
 

@@ -26,6 +26,16 @@ def buscarProdutoPeloId(id):
     produto = Produto.buscarProdutoPeloId(id)
     return jsonify(produto)
 
+@app.route('/categorias', methods=['POST'])
+def inserirCategorias():
+    categoria = request.json
+    temCadastro = Categoria.possuiCadastro(categoria)
+    if temCadastro:
+        return "Categoria ja está cadastrada!"
+    Categoria.criarNovaCategoria(categoria)
+    return "Categoria inserido com sucesso"
+    
+
 @app.route('/categorias')
 def getCategoria():
     categoria = Categoria.buscarTodasCategorias()
